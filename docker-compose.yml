@@ -1,0 +1,22 @@
+services:
+  api-hermes:
+    build:
+      context: .
+      target: development
+    container_name: api-hermes
+    ports:
+      - "3000:3000"
+    env_file: .env
+    command: npm run start:dev
+    volumes:
+      - .:/app:cached
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - public
+
+networks:
+  public:
+    name: public_network
+    driver: bridge
+    external: true
