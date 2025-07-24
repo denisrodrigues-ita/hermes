@@ -7,7 +7,6 @@ services:
     ports:
       - "3000:3000"
     env_file: .env
-    command: npm run start:dev
     volumes:
       - .:/app:cached
       - /app/node_modules

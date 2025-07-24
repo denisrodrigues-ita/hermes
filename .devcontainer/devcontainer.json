@@ -1,0 +1,27 @@
+{
+	"name": "API HERMES",
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
+	"service": "api-hermes",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Prisma.prisma",
+				"GitHub.copilot",
+				"github.copilot-chat",
+				"shd101wyy.markdown-preview-enhanced",
+				"rangav.vscode-thunder-client",
+				"streetsidesoftware.code-spell-checker",
+				"streetsidesoftware.code-spell-checker-portuguese-brazilian",
+				"eamodio.gitlens",
+				"dracula-theme.theme-dracula",
+				"ms-vscode.vscode-typescript-next",
+				"vscode-icons-team.vscode-icons"
+			]
+		}
+	},
+	"postCreateCommand": "git config --global --add safe.directory /app"
+}
