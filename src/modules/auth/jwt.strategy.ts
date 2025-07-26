@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-jwt';
+import { Strategy, ExtractJwt } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
 import * as fs from 'fs';
-import * as passportJwt from 'passport-jwt';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,46 +15,42 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private configService: ConfigService,
   ) {
     const publicKeyPath = configService.get<string>('KEYCLOAK_PUBLIC_KEY_PATH');
+    const issuer = configService.get<string>('KEYCLOAK_ISSUER');
 
-    if (!publicKeyPath) {
+    if (!publicKeyPath || !fs.existsSync(publicKeyPath)) {
       super({
-        jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         ignoreExpiration: false,
         secretOrKey: 'fallback-key-for-initialization',
       });
       return;
     }
 
-    try {
-      const publicKey = fs.readFileSync(publicKeyPath, 'utf8');
+    const publicKey = fs.readFileSync(publicKeyPath, 'utf8');
 
-      super({
-        jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
-        ignoreExpiration: false,
-        secretOrKey: publicKey,
-        algorithms: ['RS256'],
-        issuer: configService.get<string>('KEYCLOAK_ISSUER'),
-        audience: 'account',
-      });
-    } catch (_fileError: unknown) {
-      super({
-        jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
-        ignoreExpiration: false,
-        secretOrKey: 'fallback-key-for-initialization',
-      });
-    }
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: publicKey,
+      algorithms: ['RS256'],
+      issuer: issuer,
+      audience: 'account',
+    });
   }
 
-  validate(payload: Record<string, unknown>) {
+  validate(payload: Record<string, unknown>): object {
     if (!payload) {
-      throw new UnauthorizedException('Token inválido');
+      throw new UnauthorizedException('Invalid token');
     }
-    const validatedUser = this.authService.validateToken(
-      JSON.stringify(payload),
-    );
+
+    const payloadString = JSON.stringify(payload);
+
+    const validatedUser = this.authService.validateToken(payloadString);
+
     if (!validatedUser) {
-      throw new UnauthorizedException('Token inválido ou expirado');
+      throw new UnauthorizedException('Invalid or expired token');
     }
+
     return validatedUser;
   }
 }
