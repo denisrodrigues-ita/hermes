@@ -12,10 +12,11 @@ export class AuthService {
     }
 
     try {
-      const payload = JSON.parse(token);
+      const payload = JSON.parse(token) as Record<string, unknown>;
       return payload;
     } catch {
-      const publicKey = this.configService.get<string>('KEYCLOAK_PUBLIC_KEY') || '';
+      const publicKey =
+        this.configService.get<string>('KEYCLOAK_PUBLIC_KEY') || '';
       const formattedKey = publicKey.replace(/\n/g, '\n');
       const issuer = this.configService.get<string>('KEYCLOAK_ISSUER');
       try {
@@ -31,8 +32,15 @@ export class AuthService {
     }
   }
 
-  hasRole(user: { realm_access?: { roles?: string[] } } | null, requiredRole: string): boolean {
-    if (!user || !user.realm_access || !Array.isArray(user.realm_access.roles)) {
+  hasRole(
+    user: { realm_access?: { roles?: string[] } } | null,
+    requiredRole: string,
+  ): boolean {
+    if (
+      !user ||
+      !user.realm_access ||
+      !Array.isArray(user.realm_access.roles)
+    ) {
       return false;
     }
     return user.realm_access.roles.includes(requiredRole);

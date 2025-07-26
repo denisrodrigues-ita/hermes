@@ -25,12 +25,12 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
-    console.log('Request user:', request.user);
-    const { user } = request;
+    const request = context
+      .switchToHttp()
+      .getRequest<{ user?: { realm_access?: { roles?: string[] } } }>();
+    const user = request.user ?? null;
 
     if (!user) {
-      console.log('Usuário não encontrado no request');
       return false;
     }
 
@@ -38,16 +38,11 @@ export class RolesGuard implements CanActivate {
       this.authService.hasRole(user, role),
     );
 
-    console.log('Usuário tem as roles necessárias?', hasRole);
-
     if (!hasRole) {
-      console.log('Acesso negado: roles insuficientes');
       throw new ForbiddenException(
         'You do not have permission to access this resource',
       );
     }
-
-    console.log('Acesso permitido: roles verificadas com sucesso');
     return true;
   }
 }
