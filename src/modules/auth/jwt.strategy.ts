@@ -4,30 +4,16 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
+import { ENV } from '../../config/env';
 import { AuthService } from './auth.service';
-import * as fs from 'fs';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     private authService: AuthService,
-    private configService: ConfigService,
   ) {
-    const publicKeyPath = configService.get<string>('KEYCLOAK_PUBLIC_KEY_PATH');
-    const issuer = configService.get<string>('KEYCLOAK_ISSUER');
-
-    if (!publicKeyPath || !fs.existsSync(publicKeyPath)) {
-      super({
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        ignoreExpiration: false,
-        secretOrKey: 'fallback-key-for-initialization',
-      });
-      return;
-    }
-
-    const publicKey = fs.readFileSync(publicKeyPath, 'utf8');
-
+    const issuer = ENV.KEYCLOAK_ISSUER;
+    const publicKey = ENV.KEYCLOAK_PUBLIC_KEY || 'fallback-key-for-initialization';
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,

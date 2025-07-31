@@ -1,11 +1,10 @@
+
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
+import { ENV } from '../../config/env';
 
 @Injectable()
 export class AuthService {
-  constructor(private configService: ConfigService) {}
-
   validateToken(token: string): object | null {
     if (typeof token === 'object') {
       return token;
@@ -15,10 +14,8 @@ export class AuthService {
       const payload = JSON.parse(token) as Record<string, unknown>;
       return payload;
     } catch {
-      const publicKey =
-        this.configService.get<string>('KEYCLOAK_PUBLIC_KEY') || '';
-      const formattedKey = publicKey.replace(/\n/g, '\n');
-      const issuer = this.configService.get<string>('KEYCLOAK_ISSUER');
+      const formattedKey = ENV.KEYCLOAK_PUBLIC_KEY || '';
+      const issuer = ENV.KEYCLOAK_ISSUER;
       try {
         const verifiedToken = jwt.verify(token, formattedKey, {
           algorithms: ['RS256'],
