@@ -6,10 +6,6 @@ import { ENV } from '../../config/env';
 @Injectable()
 export class AuthService {
   validateToken(token: string): object | null {
-    if (typeof token === 'object') {
-      return token;
-    }
-
     try {
       const payload = JSON.parse(token) as Record<string, unknown>;
       return payload;
