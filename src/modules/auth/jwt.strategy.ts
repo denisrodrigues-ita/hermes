@@ -9,11 +9,9 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private authService: AuthService,
-  ) {
+  constructor(private authService: AuthService) {
     const issuer = ENV.KEYCLOAK_ISSUER;
-    const publicKey = ENV.KEYCLOAK_PUBLIC_KEY || 'fallback-key-for-initialization';
+    const publicKey = ENV.KEYCLOAK_PUBLIC_KEY;
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,

@@ -7,6 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { AuthService } from './auth.service';
 import { ROLES_KEY } from './roles.decorator';
+import { IUser } from './interface/user.interface';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -27,7 +28,7 @@ export class RolesGuard implements CanActivate {
 
     const request = context
       .switchToHttp()
-      .getRequest<{ user?: { realm_access?: { roles?: string[] } } }>();
+      .getRequest<{ user?: IUser }>();
     const user = request.user ?? null;
 
     if (!user) {

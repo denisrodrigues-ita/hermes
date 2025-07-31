@@ -1,7 +1,7 @@
-
 import { Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { ENV } from '../../config/env';
+import { IUser } from './interface/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +10,7 @@ export class AuthService {
       const payload = JSON.parse(token) as Record<string, unknown>;
       return payload;
     } catch {
-      const formattedKey = ENV.KEYCLOAK_PUBLIC_KEY || '';
+      const formattedKey = ENV.KEYCLOAK_PUBLIC_KEY;
       const issuer = ENV.KEYCLOAK_ISSUER;
       try {
         const verifiedToken = jwt.verify(token, formattedKey, {
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   hasRole(
-    user: { realm_access?: { roles?: string[] } } | null,
+    user: IUser | null,
     requiredRole: string,
   ): boolean {
     if (
