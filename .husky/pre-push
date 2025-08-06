@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🧪 Running tests before push..."
+
+if find src -name "*.spec.ts" | grep -q .; then
+  echo "Tests found, running..."
+  npm run test
+else
+  echo "No tests found."
+fi
