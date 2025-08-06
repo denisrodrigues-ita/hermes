@@ -1,6 +1,15 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+PROTECTED_BRANCHES="^(develop|main|master)$"
+
+if [[ $BRANCH =~ $PROTECTED_BRANCHES ]]; then
+  echo "🚫 Direct commits to $BRANCH branch are not allowed."
+  echo "Please create a branch and submit a pull request instead."
+  exit 1
+fi
+
 echo "📤 Executing lint before commit..."
 
 npx lint-staged
