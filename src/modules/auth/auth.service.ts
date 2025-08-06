@@ -25,10 +25,7 @@ export class AuthService {
     }
   }
 
-  hasRole(
-    user: IUser | null,
-    requiredRole: string,
-  ): boolean {
+  hasRole(user: IUser | null, requiredRole: string): boolean {
     if (
       !user ||
       !user.realm_access ||
