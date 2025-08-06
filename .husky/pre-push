@@ -3,4 +3,9 @@
 
 echo "🧪 Running tests before push..."
 
-npm run test
+if find src -name "*.spec.ts" | grep -q .; then
+  echo "Tests found, running..."
+  npm run test
+else
+  echo "No tests found."
+fi
