@@ -1,0 +1,17 @@
+name: Select Pull Request Template
+description: Choose the appropriate template based on the PR type
+body:
+  - type: dropdown
+    id: template
+    attributes:
+      label: Pull Request Type
+      description: Select the type of PR you are creating
+      options:
+        - Feature → Develop
+        - Develop → Main (Production Promotion)
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Please select the Pull Request type and click "Submit new issue".
