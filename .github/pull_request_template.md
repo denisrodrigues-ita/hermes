@@ -23,5 +23,5 @@
 
 ---
 > **Note:** If this is a PR between specific branches, consider using one of the dedicated templates:
-> - [Feature to Develop](https://github.com/hermes-tek/hermes/compare/develop...your-branch?template=feature_to_develop.md)
-> - [Develop to Main](https://github.com/hermes-tek/hermes/compare/main...develop?template=develop_to_main.md)
+> - [Feature to Develop](?expand=1&template=default.md)
+> - [Develop to Main](?expand=1&template=deploy.md)
