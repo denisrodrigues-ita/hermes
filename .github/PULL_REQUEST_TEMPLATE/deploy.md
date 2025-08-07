@@ -12,26 +12,26 @@
 - [ ] 🧪 Testing
 - [ ] 🔧 Build/deploy configuration
 - [ ] 🔒 Security
+- [ ] 🗄️ Database changes
+- [ ] 🔌 API endpoint changes
+- [ ] 🧩 Dependency update
+- [ ] 🚦 CI/CD pipeline changes
 
 ## Checklist
 - [ ] Code follows project standards and conventions
 - [ ] Tests added/updated to validate changes
 - [ ] Documentation updated
-- [ ] Commits follow conventional commit message pattern
-- [ ] Self-review of code performed
-- [ ] No security vulnerabilities introduced
+- [ ] Self-reviewed code before requesting PR review
+- [ ] No console.log or debug code left in production code
+- [ ] Environment variables documented (if new ones added)
+- [ ] API endpoints are properly secured (if applicable)
+- [ ] Database migrations are safe and backward compatible (if applicable)
 
 ## Evidence
 <!-- Add screenshots, logs, or any other relevant evidence -->
 
 ## Related links
 - Task/Issue: [TICKET-XX](link-to-ticket)
-
-## Change impact
-<!-- Describe if this change might impact other parts of the system -->
-
-## Steps to test
-1. <!-- How to test this implementation -->
 
 ## Additional considerations
 <!-- Any other relevant information -->
