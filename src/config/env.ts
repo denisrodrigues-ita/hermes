@@ -15,4 +15,6 @@ export const ENV = {
   KEYCLOAK_CLIENT_SECRET: configService.getOrThrow<string>(
     'KEYCLOAK_CLIENT_SECRET',
   ),
+  SSL_KEY: configService.getOrThrow<string>('SSL_KEY').replace(/\\n/g, '\n'),
+  SSL_CRT: configService.getOrThrow<string>('SSL_CRT').replace(/\\n/g, '\n'),
 };

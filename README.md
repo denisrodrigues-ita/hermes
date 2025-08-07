@@ -19,7 +19,9 @@ cp .env.example .env
 
 Then update the values in the `.env` file according to your environment configuration.
 
-For Keycloak setup details, refer to the [Keycloak setup instructions](/docs/keycloak-instructions.md).
+For additional configuration details:
+- [Keycloak setup instructions](/docs/keycloak-instructions.md)
+- [HTTPS local development setup](/docs/ssl-setup.md)
 
 ## Running the Project
 
@@ -79,5 +81,6 @@ DevContainers provide a consistent development environment across the team. To u
 - Pre-configured development environment
 - Node.js v22.17.0 pre-installed
 - Shared Docker socket for Docker-in-Docker support
+- HTTPS support for local development (see [SSL setup instructions](/docs/ssl-setup.md))
 - Useful utilities included: git, curl, wget, etc.
 - DevContainer settings can be customized in `.devcontainer/devcontainer.json`
