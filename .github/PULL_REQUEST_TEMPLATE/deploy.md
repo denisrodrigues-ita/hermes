@@ -13,5 +13,8 @@
 - [ ] Migration scripts have been tested (if applicable)
 - [ ] Rollback plan is prepared
 
+## Evidence
+<!-- Add screenshots, logs, or any other relevant evidence -->
+
 ## Additional Notes
 <!-- Any other information relevant to this promotion -->
