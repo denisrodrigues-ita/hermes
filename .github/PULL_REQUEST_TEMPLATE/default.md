@@ -33,5 +33,5 @@
 ## Related links
 - Task/Issue: [TICKET-XX](link-to-ticket)
 
-## Additional considerations
+## Additional Notes
 <!-- Any other relevant information -->
