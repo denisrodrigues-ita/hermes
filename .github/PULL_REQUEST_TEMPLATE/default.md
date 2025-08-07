@@ -1,40 +1,37 @@
-# 🚀 Production Promotion (develop → main)
+# Pull Request to Develop
 
-## Release Summary
-<!-- Briefly describe the set of features being promoted to production -->
+## Description
+<!-- Describe the purpose of this PR -->
 
-## Key Changes
-<!-- List the main features, fixes or improvements included in this release -->
-- 
-- 
-- 
+## Type of change
+- [ ] ✨ New feature
+- [ ] 🐛 Bug fix
+- [ ] 📝 Documentation
+- [ ] ♻️ Refactoring
+- [ ] ⚡ Performance improvement
+- [ ] 🧪 Testing
+- [ ] 🔧 Build/deploy configuration
+- [ ] 🔒 Security
+- [ ] 🗄️ Database changes
+- [ ] 🔌 API endpoint changes
+- [ ] 🧩 Dependency update
+- [ ] 🚦 CI/CD pipeline changes
 
-## Release Checklist
-- [ ] Develop branch is stable and all tests are passing
-- [ ] All incorporated PRs have been reviewed and tested
-- [ ] Documentation has been updated (if applicable)
-- [ ] Migration scripts have been tested (if applicable)
-- [ ] Rollback plan is prepared
+## Checklist
+- [ ] Code follows project standards and conventions
+- [ ] Tests added/updated to validate changes
+- [ ] Documentation updated
+- [ ] Self-reviewed code before requesting PR review
+- [ ] No console.log or debug code left in production code
+- [ ] Environment variables documented (if new ones added)
+- [ ] API endpoints are properly secured (if applicable)
+- [ ] Database migrations are safe and backward compatible (if applicable)
 
-## Testing and Validation
-- [ ] Unit tests passing
-- [ ] E2E tests passing
-- [ ] Performance tests conducted (if applicable)
-- [ ] Security tests conducted (if applicable)
+## Evidence
+<!-- Add screenshots, logs, or any other relevant evidence -->
 
-## Quality Metrics
-<!-- Add metrics such as test coverage, code analysis, etc. -->
+## Related links
+- Task/Issue: [TICKET-XX](link-to-ticket)
 
-## Deployment Plan
-<!-- Describe any special steps needed for this deployment -->
-1. 
-2. 
-3. 
-
-## Rollback Plan
-<!-- Describe the contingency plan in case something goes wrong -->
-1. 
-2. 
-
-## Additional Notes
-<!-- Any other information relevant to this promotion -->
+## Additional considerations
+<!-- Any other relevant information -->
