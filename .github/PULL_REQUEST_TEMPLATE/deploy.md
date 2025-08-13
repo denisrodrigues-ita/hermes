@@ -3,8 +3,6 @@
 ## Key Changes
 <!-- List the main features, fixes or improvements included in this release -->
 - 
-- 
-- 
 
 ## Release Checklist
 - [ ] Develop branch is stable and all tests are passing
